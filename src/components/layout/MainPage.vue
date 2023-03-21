@@ -17,5 +17,6 @@
 <style scoped>
 .el-main {
   display: flex;
+  padding: 0;
 }
 </style>
