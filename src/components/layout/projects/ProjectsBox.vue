@@ -13,6 +13,7 @@ import type { Project } from '../../../public/interface';
 // 获取当前tag
 const prop = defineProps(['tag']);
 let tagProjects:Array<Project>;
+// 根据tag渲染不同内容
 if(prop.tag==='all') {
   tagProjects = projects;
 } else {
