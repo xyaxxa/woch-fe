@@ -9,15 +9,20 @@
           <span>ALL</span>
         </span>
       </template>
+      <ProjectsBox tag="all"/>
     </el-tab-pane>
-    <el-tab-pane label="VUE" name="second">Config</el-tab-pane>
-    <el-tab-pane label="Node" name="third">Role</el-tab-pane>
+    <el-tab-pane label="VUE" name="second">
+      <ProjectsBox tag="vue"/>
+    </el-tab-pane>
+    <el-tab-pane label="Node" name="third">
+      <ProjectsBox tag="node"/>
+    </el-tab-pane>
   </el-tabs>
 </template>
 
 <script setup lang="ts">
+import ProjectsBox from './projects/ProjectsBox.vue';
 import { ref } from 'vue';
 const activeName = ref('first');
-
 
 </script>

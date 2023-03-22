@@ -1,4 +1,7 @@
-const projects:Array<Object> = [
+import { reactive } from "vue";
+import type { Project } from "../public/interface";
+
+const projects:Array<Project> = reactive([
   {
     name: 'woch-fe',
     description: 'a personal website-- fe',
@@ -11,6 +14,6 @@ const projects:Array<Object> = [
     url: 'https://github.com/xyaxxa/woch-be',
     tags: ['node'],
   },
-];
+]);
 
 export default projects;
