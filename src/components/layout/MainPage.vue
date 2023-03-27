@@ -1,6 +1,6 @@
 <template>
   <el-container class="main-page">
-    <el-header>
+    <el-header height="60px">
       <MainHeader />
     </el-header>
     <el-main>
@@ -18,5 +18,8 @@
 .el-main {
   display: flex;
   padding: 0;
+}
+.el-header {
+  box-shadow: -5px 0 10px #eeeeee;
 }
 </style>
