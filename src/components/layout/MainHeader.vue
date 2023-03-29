@@ -8,12 +8,68 @@
           <el-col :span="6"><div class="center-box option-box"><a target="_blank">github</a></div></el-col>
           <el-col :span="6"><div class="center-box option-box"><a target="_blank">知乎</a></div></el-col>
           <el-col :span="6"><div class="center-box option-box">blog</div></el-col>
-          <el-col :span="6"><div class="center-box option-box">管理</div></el-col>
+          <el-col :span="6"><div class="center-box option-box" @click="verifyDialogVisible=true">管理</div></el-col>
         </el-row>
       </el-col>
     </el-row>
   </div>
+  <el-dialog
+    v-model="verifyDialogVisible"
+    title="验证身份"
+    width="40%"
+    class="verify-dialoge">
+    <el-form :model="verifyForm" :inline="true">
+      <el-form-item label="密码" required>
+        <el-input v-model="verifyForm.password" type="password"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="verifyIdentity">确认</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
+  <el-dialog
+    v-model="manageDialogVisible"
+    title="管理"
+    width="40%"
+    class="manage-dialoge">
+    <el-button @click="">增加项目</el-button>
+  </el-dialog>
 </template>
+
+<script setup lang="ts">
+import { reactive, ref } from 'vue';
+import RequestApi from '../../api';
+import { ElMessage } from 'element-plus';
+
+// 控制对话框的显示
+let manageDialogVisible = ref(false);
+let verifyDialogVisible = ref(false);
+let addProjectDialogVisible = ref(false);
+
+// 校验身份
+const verifyForm = reactive({
+  password: '',
+})
+const verifyIdentity = function() {
+  RequestApi.Verify(verifyForm.password).then((res) => {
+    if(res.data.success) {
+      verifyDialogVisible.value = false;
+      manageDialogVisible.value = true;
+    }
+    else {
+      ElMessage({
+        message: '密码错误！',
+        type: 'error',
+      })
+    }
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+
+// 增加项目
+
+</script>
 
 <style scoped>
 .header-box {

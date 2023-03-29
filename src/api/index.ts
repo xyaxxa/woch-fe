@@ -4,6 +4,14 @@ const RequestApi = {
   Projects: () => request({
     url: 'projects',
     method: 'get',
+  }),
+
+  Verify: (password:string) => request({
+    url: 'verify',
+    method: 'post',
+    data: {
+      password,
+    }
   })
 }
 
