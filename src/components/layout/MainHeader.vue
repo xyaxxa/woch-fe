@@ -32,7 +32,32 @@
     title="管理"
     width="40%"
     class="manage-dialoge">
-    <el-button @click="">增加项目</el-button>
+    <el-button @click="manageDialogVisible=false;addProjectDialogVisible=true">增加项目</el-button>
+  </el-dialog>
+  <el-dialog
+    v-model="addProjectDialogVisible"
+    title="增加项目"
+    width="40%">
+    <el-form :model="addProjectForm" label-width="60px">
+      <el-form-item label="名称" required>
+        <el-input v-model="addProjectForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="介绍" required>
+        <el-input v-model="addProjectForm.description"></el-input>
+      </el-form-item>
+      <el-form-item label="链接" required>
+        <el-input v-model="addProjectForm.url"></el-input>
+      </el-form-item>
+      <el-form-item label="标签" required>
+        <el-checkbox-group v-model="addProjectForm.tags">
+          <el-checkbox label="vue" />
+          <el-checkbox label="node" />
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="addProject" width="100">确认</el-button>
+      </el-form-item>
+    </el-form>
   </el-dialog>
 </template>
 
@@ -40,6 +65,7 @@
 import { reactive, ref } from 'vue';
 import RequestApi from '../../api';
 import { ElMessage } from 'element-plus';
+import type { Project } from '../../public/interface';
 
 // 控制对话框的显示
 let manageDialogVisible = ref(false);
@@ -49,7 +75,7 @@ let addProjectDialogVisible = ref(false);
 // 校验身份
 const verifyForm = reactive({
   password: '',
-})
+});
 const verifyIdentity = function() {
   RequestApi.Verify(verifyForm.password).then((res) => {
     if(res.data.success) {
@@ -68,7 +94,21 @@ const verifyIdentity = function() {
 }
 
 // 增加项目
-
+const addProjectForm:Project = reactive({
+  name: '',
+  description: '',
+  url: '',
+  tags: [],
+});
+const addProject = function() {
+  RequestApi.addProject(addProjectForm).then((res) => {
+    if(res.data.success) {
+      console.log('增加成功');
+    }
+  }).catch((err) => {
+    console.log(err);
+  })
+}
 </script>
 
 <style scoped>

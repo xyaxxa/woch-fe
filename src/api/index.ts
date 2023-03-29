@@ -1,4 +1,5 @@
 import request from "../utils/request";
+import type { Project } from "../public/interface";
 
 const RequestApi = {
   Projects: () => request({
@@ -11,7 +12,16 @@ const RequestApi = {
     method: 'post',
     data: {
       password,
-    }
+    },
+  }),
+
+  addProject: (project:Project) => request({
+    url: 'admin/addproject',
+    method: 'post',
+    data: {
+      project,
+    },
+    withCredentials: true,
   })
 }
 

@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 // 定义Project类型接口
 interface Project {
   name: string,
