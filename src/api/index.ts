@@ -21,7 +21,6 @@ const RequestApi = {
     data: {
       project,
     },
-    withCredentials: true,
   })
 }
 
