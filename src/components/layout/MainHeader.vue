@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-row class="header-box">
-      <el-col :span="8"><div class="center-box title-box">XYAXX</div></el-col>
-      <el-col :span="8"></el-col>
-      <el-col :span="8">
+      <el-col :span="8" :xs="24"><div class="center-box title-box">XYAXX</div></el-col>
+      <el-col :span="8" :xs="0"></el-col>
+      <el-col :span="8" :xs="24">
         <el-row class="header-box">
           <el-col :span="6"><div class="center-box option-box"><a target="_blank">github</a></div></el-col>
           <el-col :span="6"><div class="center-box option-box"><a target="_blank">知乎</a></div></el-col>
@@ -126,5 +126,10 @@ const addProject = function() {
 }
 a {
   color: black;
+}
+@media screen and (max-width: 768px) {
+  .header-box {
+    height: 120px;
+  }
 }
 </style>

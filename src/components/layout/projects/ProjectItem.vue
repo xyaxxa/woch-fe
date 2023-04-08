@@ -33,7 +33,7 @@ const project = defineProps<Project>();
 a {
   color: black;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .project-item {
     min-width: 70vw;
   }

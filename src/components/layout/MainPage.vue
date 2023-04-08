@@ -22,4 +22,9 @@
 .el-header {
   box-shadow: -5px 0 10px #eeeeee;
 }
+@media screen and (max-width: 768px) {
+  .el-header {
+    height: 120px;
+  }
+}
 </style>
