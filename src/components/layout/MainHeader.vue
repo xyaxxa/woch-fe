@@ -38,17 +38,17 @@
     v-model="addProjectDialogVisible"
     title="增加项目"
     width="40%">
-    <el-form :model="addProjectForm" label-width="60px">
-      <el-form-item label="名称" required>
+    <el-form :model="addProjectForm" label-width="60px" :rules="rules">
+      <el-form-item label="名称"  prop="name" required>
         <el-input v-model="addProjectForm.name"></el-input>
       </el-form-item>
-      <el-form-item label="介绍" required>
+      <el-form-item label="介绍"  prop="description" required>
         <el-input v-model="addProjectForm.description"></el-input>
       </el-form-item>
-      <el-form-item label="链接" required>
+      <el-form-item label="链接"  prop="url" required>
         <el-input v-model="addProjectForm.url"></el-input>
       </el-form-item>
-      <el-form-item label="标签" required>
+      <el-form-item label="标签"  prop="tags" required>
         <el-checkbox-group v-model="addProjectForm.tags">
           <el-checkbox label="vue" />
           <el-checkbox label="node" />
@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import RequestApi from '../../api';
-import { ElMessage } from 'element-plus';
+import { ElMessage, FormRules } from 'element-plus';
 import type { Project } from '../../public/interface';
 
 // 控制对话框的显示
@@ -100,6 +100,19 @@ const addProjectForm:Project = reactive({
   url: '',
   tags: [],
 });
+// 校验输入数据
+const validateUrl = (rule:any, value:any, callback:any) => {
+  const regRule = new RegExp(/^((ht|f)tps?):\/\/([\w-]+(\.[\w-]+)*\/?)+(\?([\w\-\.,@?^=%&:\/~\+#]*)+)?$/);
+  const valid:boolean = regRule.test(value);
+  if(!valid) {
+    callback(new Error('输入正确的url!'));
+  } else {
+    callback();
+  }
+}
+const rules = reactive<FormRules>({
+  url: [{validator: validateUrl, trigger: 'blur'}],
+})
 const addProject = function() {
   RequestApi.addProject(addProjectForm).then((res) => {
     if(res.data.success) {
