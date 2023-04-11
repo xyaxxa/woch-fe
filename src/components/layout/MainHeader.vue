@@ -84,7 +84,7 @@ const verifyIdentity = function() {
     }
     else {
       ElMessage({
-        message: '密码错误！',
+        message: '校验失败!',
         type: 'error',
       })
     }
@@ -103,7 +103,15 @@ const addProjectForm:Project = reactive({
 const addProject = function() {
   RequestApi.addProject(addProjectForm).then((res) => {
     if(res.data.success) {
-      console.log('增加成功');
+      ElMessage({
+        message: '成功添加!请刷新页面查看',
+        type: 'success',
+      })
+    } else {
+      ElMessage({
+        message: '添加失败!',
+        type: 'error',
+      })
     }
   }).catch((err) => {
     console.log(err);
